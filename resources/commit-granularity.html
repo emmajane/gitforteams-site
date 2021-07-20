@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Commit Granularity &mdash; Git for Teams &mdash; Creating efficiency for teams of one or more.</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+        <link href="/css/style.css" rel="stylesheet" type="text/css" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="/components/highlightjs/styles/github.css" />
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Git for Teams activity feed" />
+        <style>
+        /** quick fix because bootstrap <pre> has a background-color. */
+        pre code { background-color: inherit; }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="/">Git for Teams</a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                                <li><a href="/resources">Articles</a></li>
+                                <li><a href="/workshops">Workshops</a></li>
+                                <li><a href="/books">The Book</a></li>
+                                <li><a href="/videos">The Videos</a></li>
+                                <li><a href="/blog">Blog</a></li>
+                                <li><a href="/about">About</a></li>
+                            </ul>
+                        </div><!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="mainContent container">
+            <div class="row-fluid">
+                <div class="span8">
+                    <article>
+<h1>Commit Granularity</h1>
+
+  <div>
+    <p><strong>Update: 2014-06-18.</strong> Parts of this resource have been moved to
+their own sections on <a href="/resources/best-practices-team.html">Best Practices for
+Teams</a> and
+<a href="/resources/branching.html">Branching</a>.</p>
+
+<p>If you are new to Git it can be difficult to know when should you should create a new branch, and when you should commit your work. The way that you work with a version control system will change as you learn to trust both the system, and yourself. As a novice, I think we are more likely to do the smallest amount of work and then show someone while asking, "Like this?". As we mature, we become more confident in our ability to conceptualize a problem and implement a possible solution. The way we present the solution back to our reviewers changes as well. I remember my days as a math student: early on I had to show all of my steps to get full marks; but as I advanced, it was the final solution, and my reasoning <em>why</em> (not <em>how</em>) which mattered most.</p>
+
+<h1 id="organizing-your-thoughts">Organizing Your Thoughts</h1>
+
+<p>In distributed source control systems, such as Git, branching is inexpensive because the branches can exist within your local repository and do not need to be shared with the central system. The overwhelming majority of experienced developers will recommend you start a new branch for every new idea that you have. Each branch can be worked on individually, and you can leave partially completed ideas in a branch if you just need to make a fix real quick to the live site.</p>
+
+<p>Let's take a look at how this might play out: I've decided to build my web site using Sculpin, a static site generator. I download the starter kit and immediately create a new branch for my own "hacks" to the site. This new branch allows me to more easily make updates to the Sculpin software independently of the changes that I've made. I'm hacking away on the site and realize I'd like to add a new content type. I'm not really sure how (or if) it's a good idea, so I create a third branch to play around in. If I decide I don't want to keep the changes, I can simply return to the main branch of my work, and discard the tinkering. This is where you want to get to.</p>
+
+<p>I've found newcomers to git can get frustrated and stressed out as they try to switch between branches and their work isn't committed (which prevents you from making the switch). I've also found that new developers generally hold one new idea worth of code at a time, but they aren't as likely to explore multiple new code ideas simultaneously. As a result, I recommend novices master moving backwards and forwards on a single time line, rather than moving across time lines.</p>
+
+<p>On one of the early projects I worked on with a distributed version control system, I worked progressively through a few options for a client's web site. Each time I made incremental changes in a single branch, I took a snapshot of my code with both a commit, and a tag. I was able to easily show variations to the client by moving forwards or backwards in the commit history. The variations were fairly minor: colour changes, and the image used in the banner, if I remember correctly.</p>
+
+<p>Branches are not complicated. With time you will absolutely come to love them! But it can be difficult to know what "deserves" a branch if you're just starting out as a team of one. In teams of more than one, it's easy: anything that's worthy of a ticket should have its own branch so that you can make the changes outlined in the ticket. As a team of one, you might not have a ticketing system. If you do, great! Use this as your basis for what gets a new branch. But if you don't have a ticketing system, take the time to work in a master branch (or perhaps a content branch if you are working with a starter kit, such as Sculpin, Jekyll, or some other CMS) and learn how to work with <code>checkout</code>, <code>stash</code>, <code>reset</code>, and <code>revert</code>. Learn to use effective tags and commit messages. It will allow you to be even more effective when you work on larger projects with more complex branching patterns.</p>
+
+<h1 id="commit-granularity">Commit Granularity</h1>
+
+<p>I've seen two basic approaches to commits: demonstrate the thinking process vs. present the final solution. When I'm programming, I think in increments, therefore I commit in increments, I want to be able to track how I thought through a problem. I do not necessarily want to be able to roll back to every single commit in my time line. This also means that I'm willing to sacrifice the tool <code>git bisect</code> when debugging work as a single commit may not actually bit a coherent point in the code base where the build compiled. HOWEVER, the title of this section is actually about the best-ever PUBLISHED commit, i.e. one that is shared with others. If you were to read my commit messages when I code, you would be able to easily unpack my thinking. Commits might show work in increments as small as 15-30minutes. The commit messages are unlikely to explain "why" I've done something, but the initial commit should contain a docblock of code comments which outline what I'm about to do. In this case, you'll need to read the git diffs to see what I've done.</p>
+
+<p>When I'm working on content, however, I am much more confident, and perhaps more aggressive. I mash things up. I move things around. I don't worry about tracking my changes (perhaps because my progressions would embarrass future me?) and I work until things are presentable. Then, when I feel my work is done, I collect the pages I've created, group them into a logical progression of commits (for example: if I created a new template, I would commit this first) and write detailed commit messages with the highlights of what I've done and why I've done it. Yes, you could still go back and read the git diffs to see exactly what I've done (and you should if you're reviewing my work), but you wouldn't need to read them to get a sense of the changes I made.</p>
+
+<p>I hesitate to call these two approaches a novice vs. advanced approach to <em>version control</em>, but I think it does sort of lean in that direction. Different source control management systems will have different ways of presenting commits in the history of your project. Git is very granular in how it shows you the commit history as a result thinking in tiny commit increments gets messy and frustrating to work with. This is why we say that as you "mature" with Git, you will be more likely to adopt the second approach.</p>
+
+<p>You don't need to give up your tiny commits though. You can use <code>git rebase</code> to combine many little, unpublished, commits into a history that is more like the second version. Work the way you want to work, present the history in the way others want to consume it. (Yes, I hate with a screaming passion that git allows you to re-write history, but it's sloppy enough in how it deals with showing commits that it becomes necessary. It's okay, you don't need to love it either.)</p>
+
+<p>If you have a culture of showing work in progress, you will need to be careful in how you use <code>git rebase</code>. Each time you rebase, you change the hash which represents your commit. This means the ID of each commit will be different, and make it appear completely different from a pointer perspective. There are ways around this, for example, only working in side branches and changing the name of the branch. If you have an on-site team, it's easy to look over a person's shoulder, but if you work in a distributed team, and you need to publish your work to share it, rebasing can make sharing work in progress more challenging.</p>
+
+<p>On the opposite side of this coin, you don't need to forego a
+granular commit history just because you like to do all of your
+thinking (and make radical changes) at once. Any single chunk
+of work can be separated into individual hunks, which can be
+applied selectively using <code>git add --patch &lt;filename&gt;</code>. This
+command will walk through your file, line-by-line, and ask you
+if you would like to include each changed line in the commit
+  you are building.</p>
+
+<h2 id="the-best-ever-published-commit">The Best-Ever Published Commit</h2>
+
+<p>This is completely subjective, which makes it difficult to work in teams if everyone is using their own definition of the best-ever published commit.</p>
+
+<ol>
+<li>Contains only related code. No scope creep, no "just fixing white space issues too".</li>
+<li>Conforms to coding standards for your project, including in-code documentation.</li>
+<li>Is just the right size. Perhaps this is 100 lines of code. Or perhaps it's a mega re-factoring where a function name changed and 1000 lines of code were affected.</li>
+<li>Is described in the best-ever commit message (see the next section).</li>
+</ol>
+
+<h2 id="the-best-ever-commit-message">The Best-Ever Commit Message</h2>
+
+<p>My friend Joe Shindelar writes the best-ever commit messages. His general rule is "Whatever it takes to make future me not get pissed off at past me for being lazy."</p>
+
+<ol>
+<li>Use a standard format to make it easy to scan logs.</li>
+<li>Answer the question: Why is this change necessary?</li>
+<li>Describe, at a high level, how the change addresses the issue identified.</li>
+<li>Outline the potential side effects the change may have.</li>
+<li>Give a summary of the changes made, so that reading the diff of the code confirms the commit message, but reading the diff is not guesswork on what / why something has changed.</li>
+</ol>
+
+<h2 id="sample-commit-messages">Sample Commit Messages</h2>
+
+<p>Bad Example: <code>git commit -am "re-wrote entire site in angular.js - it's faster now, I'm sure"</code></p>
+
+<p>Analysis:</p>
+
+<ul>
+<li>By using the <code>-a</code> flag, all files will be committed as part of this commit en masse, and without consideration if they should be included or not.</li>
+<li>By using the <code>-m</code> flag, the tendency will always be to write only a terse message which does not describe why the change is necessary, and how the change addresses this necessary change.</li>
+<li>The commit message does not reference a ticket number, so it's impossible to know which issue(s) are now resolved and can be closed in the ticket tracker.</li>
+</ul>
+
+<p>Good Example:</p>
+
+<pre><code>[#321] Stop clipping trainer meta-data on video nodes at small screen size.
+
+- Removes an unnecessary overflow: hidden that was causing some clipping.
+
+Resolves #321
+</code></pre>
+
+<p>Analysis:</p>
+
+<ul>
+<li>Includes the ticket number, in square brackets, at the beginning of the terse commit message, making it easier to read the logs later.</li>
+<li>Terse description (for the short log view) explains the symptom that was seen by site visitors.</li>
+<li>Detailed explanation explains the technical implementation which was used to resolve the problem.</li>
+<li>The final line of the commit message <code>Resolves #321</code> will be captured by the ticketing system and move the ticket from "open" to "needs review".</li>
+</ul>
+
+<h1 id="references">References</h1>
+
+<ul>
+<li><a href="http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html">Well-formed Commit Messages</a></li>
+<li><a href="https://drupal.org/node/52287">Drupal.org Standard for Commit
+Messages</a></li>
+<li><a href="http://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message">5 Useful Tips for a Better Commit Message</a></li>
+<li><a href="http://git-scm.com/blog/2010/08/25/notes.html">Using Notes to Amend Commit
+Messages</a></li>
+<li><a href="https://www.lullabot.com/blog/article/git-best-practices-workflow-guidelines">The Case for Small, Logical Commits</a></li>
+</ul>
+
+  </div>
+</article>
+                </div>
+                <div class="span4 sidebar">
+                    <div class="well text-center">
+                        <h4>Available from O'Reilly</h4>
+		    </div>
+                    <iframe src="http://www.oreilly.com/authors/widgets/674.html" height="500px" width="200px" scrolling="no" frameborder="0"></iframe>
+                    <iframe src="http://www.oreilly.com/authors/widgets/671.html" height="500px" width="200px" scrolling="no" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        <footer class="container">
+            &copy; 2016 Git for Teams
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/components/jquery/jquery.min.js"><\/script>')</script>
+        <script src="/components/bootstrap/js/bootstrap.min.js"></script>
+                
+                <script src="/components/highlightjs/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

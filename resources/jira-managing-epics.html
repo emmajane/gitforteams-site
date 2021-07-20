@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Managing Epics in JIRA &mdash; Git for Teams &mdash; Creating efficiency for teams of one or more.</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+        <link href="/css/style.css" rel="stylesheet" type="text/css" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="/components/highlightjs/styles/github.css" />
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Git for Teams activity feed" />
+        <style>
+        /** quick fix because bootstrap <pre> has a background-color. */
+        pre code { background-color: inherit; }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="/">Git for Teams</a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                                <li><a href="/resources">Articles</a></li>
+                                <li><a href="/workshops">Workshops</a></li>
+                                <li><a href="/books">The Book</a></li>
+                                <li><a href="/videos">The Videos</a></li>
+                                <li><a href="/blog">Blog</a></li>
+                                <li><a href="/about">About</a></li>
+                            </ul>
+                        </div><!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="mainContent container">
+            <div class="row-fluid">
+                <div class="span8">
+                    <article>
+<h1>Managing Epics in JIRA</h1>
+
+  <div>
+    <p>A brief look at how I manage tickets in JIRA. This has implications for Git branches (when to use Ticket Branches vs. combining multiple tickets into a single Feature Branch).</p>
+
+<p>I've seen a lot of folks create ALL the user stories to start for EVERY Epic, and I feel like it's just busy work for the Business Analyst. It makes the backlog harder to sort, it's annoying for the devs to provide estimates on things they aren't going to look at for quite a while (and the estimates end up being inaccurate anyway).</p>
+
+<p>So instead of breaking everything out at the beginning, this is the approximate flow that I use (this is more or less described in Jeff Patton's <a href="https://shop.oreilly.com/product/0636920033851.do">User Story Mapping</a>, so you don't need to take my word for it):</p>
+
+<ul>
+<li>Ideally kick off with a brainstorming session of everything you might want the system to do. Google "User Story Mapping" for articles. The book is decent, but mostly gives case studies, not a lot of extra "HOWTO" detail.</li>
+<li>Create Epics for the major areas of business value. These Epics should have a definition of done and be "closable". If they're a long running (sub)system, you should use categories / labels instead. For example: Photo Gallery is a closable Epic; "theming" is a long running label.</li>
+<li>In every Epic, import the details from your brainstorming session to include the "cheapest possible way to expose this business value" through to "future daydreaming". This will give you a really good sense of what you should scaffold if you were building for the future vs. what you might want to duct tape together for now, but plan to replace later. There's a <a href="http://blog.codeship.com/five-suggestions-for-building-an-infrastructure-for-innovation/">great (short!) presentation about this</a>. With one client we jokingly referred to these levels as "MVP", "MVP+", "MVP++". They weren't always developmentally sequential though. Sometimes MVP+ was technically a different solution. The Epic captured the range of what the client would be happy to see delivered, and allowed for great conversations about what we should do NOW vs. things that were "super very important for later" (yup, the client let me use that language; he was brilliant good fun to work with).</li>
+<li>One or two sprints before you're ready to start on the Epic, work with a developer to break the Epic into the likely stories / tasks needed to "expose the minimum work to provide the business value outlined in the Epic". This is where you start getting into details about the features and the estimation. I like Epics that can be closed within a couple of sprints, but / and the descriptions often have a LOT more in them. Aim to have the first round of stories completed within a couple of sprints. Then decide if the Epic should be closed, or if the next round of stories should be shaved off and worked on.</li>
+<li>Write up the individual User Stories (as separate JIRA items) for the Epic using the format of Card / Conversation / Confirmation. Card should include business value; Conversation should copy over relevant details from the Epic; Confirmation should include the steps you plan to have QA take to close out the ticket. (An alternate approach to ticket format that I helped to develop is <a href="https://drupalize.me/blog/201402/our-new-project-management-process">described on the Drupalize.Me site</a>.) This tells the devs exactly what you want them to build. The BA might write the tickets up at this point, but anyone who's been involved in the conversation <em>should</em> be able to (if they can't; there probably wasn't enough discussion at the Epic level). Ideally each User Story is equally weighted in terms of work, but not always. Once the devs start working, I don't worry too much if they combine things into one Feature branch instead of per-ticket branches. SO LONG AS they can get the Feature wrapped up in NOT MORE than one sprint. Very big branches are a PITA to code review and typically will have more issues with integration / merge conflicts than lots of small ones. In a Drupal build, the Epic might take several sprints to close as it could include custom dev work; site building / Features; theming; content migration; etc.</li>
+<li>Once the individual stories are written up; update the Epic description to include a bullet list of the Cards + link to the Epic. Yes, the list will also appear at the bottom of the description, but I liked putting it into the text as well.</li>
+</ul>
+
+<h1 id="resources">Resources</h1>
+
+<ul>
+<li><a href="https://shop.oreilly.com/product/0636920033851.do">User Story Mapping - book</a></li>
+<li><a href="http://blog.codeship.com/five-suggestions-for-building-an-infrastructure-for-innovation/">Five Suggestions for Building Infrastructure for Innovation</a></li>
+<li>An alternative to Epics <a href="https://drupalize.me/blog/201402/our-new-project-management-process">Kanban-style Buckets at Drupalize.Me</a></li>
+</ul>
+
+  </div>
+</article>
+                </div>
+                <div class="span4 sidebar">
+                    <div class="well text-center">
+                        <h4>Available from O'Reilly</h4>
+		    </div>
+                    <iframe src="http://www.oreilly.com/authors/widgets/674.html" height="500px" width="200px" scrolling="no" frameborder="0"></iframe>
+                    <iframe src="http://www.oreilly.com/authors/widgets/671.html" height="500px" width="200px" scrolling="no" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        <footer class="container">
+            &copy; 2016 Git for Teams
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/components/jquery/jquery.min.js"><\/script>')</script>
+        <script src="/components/bootstrap/js/bootstrap.min.js"></script>
+                
+                <script src="/components/highlightjs/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dealing with a Detached HEAD &mdash; Git for Teams &mdash; Creating efficiency for teams of one or more.</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+        <link href="/css/style.css" rel="stylesheet" type="text/css" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="/components/highlightjs/styles/github.css" />
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Git for Teams activity feed" />
+        <style>
+        /** quick fix because bootstrap <pre> has a background-color. */
+        pre code { background-color: inherit; }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="/">Git for Teams</a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                                <li><a href="/resources">Articles</a></li>
+                                <li><a href="/workshops">Workshops</a></li>
+                                <li><a href="/books">The Book</a></li>
+                                <li><a href="/videos">The Videos</a></li>
+                                <li><a href="/blog">Blog</a></li>
+                                <li><a href="/about">About</a></li>
+                            </ul>
+                        </div><!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="mainContent container">
+            <div class="row-fluid">
+                <div class="span8">
+                    <article>
+<h1>Dealing with a Detached HEAD</h1>
+
+  <div>
+    <p>Imagine you have a pile of paper clips. Each paper clip represents a commit object in your Git repository. Having a pile of paper clips isn't very realistic though, because a paper clip only exists once a commit is performed. Perhaps think of an empty dance floor. The first paper clip hops onto the dance floor, and the spotlight focuses on this new dancer. It's a bit lonely though, so it encourages others to join along, forming a chain, or a conga line of dancers. Each time a new paper clip dancer joins the line, the spotlight shifts to the last paper clip in the lineup. A branch is a pointer to the most recent paper clip dancer.</p>
+
+<p>Let's take a look at this in practice. Go ahead and create a new repository.</p>
+
+<pre><code>$ mkdir paperclips
+$ cd paperclips
+$ git init
+</code></pre>
+
+<p>Fantastic! Now. Pause for a second and think about your surroundings. What are you linked to right now? You made a directory, you initialized it for use with Git, but you aren't linked to anything yet, because there are no commits in your repository. The dance floor is empty! If you are using prompt customizations, they will likely report that you are currently in a detached HEAD state. The status message, however, simply lets you know you are on the master branch, waiting for the initial commit.</p>
+
+<pre><code>$ git status
+
+On branch master
+
+Initial commit
+
+nothing to commit (create/copy files and use "git add" to track)
+</code></pre>
+
+<p>Add a few files to your directory, and make a few commits. Each of these commits is the same as linking a paper clip to your chain. I recommend downloading a few GIFs from <a href="http://bukk.it/">bukk.it</a>, and placing them into your repository folder. Then add the images into your repository as separate commits.</p>
+
+<pre><code>$ git add aterriblemistake.jpg
+$ git commit -m "Adding: A terrible mistake"
+$ git add celebration.gif
+$ git commit -m "Adding: A celebration"
+$ git add ick.gif
+$ git commit -m "Adding: ick"
+</code></pre>
+
+<p>You will now have three separate commits in your branch, <code>master</code>. Go ahead and confirm this with the <code>log</code> command.</p>
+
+<pre><code>$ git log --oneline
+
+aa04231 Adding: ick
+5629cba Adding: A celebration
+7d23c8a Adding: A terrible mistake
+</code></pre>
+
+<p>What if we wanted to look at one of those paper clips independent of the chain? We could, simply, swivel the spotlight to look at a single commit object, or paper clip dancer. With the spot light entirely on this dancing paperclip the rest of the chain becomes momentarily irrelevant. If we are thinking about a chain of paper clips, you might think this breaks the branch. And that would be scary. But it's not like that. You see branches aren't physical connections, they are simply relationship definitions. If a paper clip dancer lets go of the conga line briefly, they it doesn't lose limbs, and it can always reconnect.</p>
+
+<p>Git, however, is mostly interested in the last person added to the conga line. Git actually ignores the leader of the conga line, paying attention only to the last HEAD added (who pays attention to the paper clip dancer ahead of them who pays attention to the paper clip dancer ahead of them and all the way back to the beginning of the line). A branch, is like a spotlight pointing at that last paper clip dancer, with the details about who that last person hooked onto.</p>
+
+<p>If we want to look at any one HEAD, or paper clip, in the chain we effectively add a second spotlight briefly so we can take a look at that specific paperclip dancer. The branch doesn't break or cease to exist, but the second spotlight focuses on that one commit for a period of time. Maybe our dancer from the conga line, with the full attention of the new spotlight, chooses to do a little breakdance. Perhaps it even invites other dancers to join it (create new commits), or even starts its own conga line (creates a new branch with this commit as the initial commit object).</p>
+
+<p>Go ahead and point your spotlight on a specific commit object in your repository by checking out a specific commit.</p>
+
+<pre><code>$ git checkout 5629cba
+
+Note: checking out '5629cba'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b &lt;new-branch-name&gt;
+
+HEAD is now at 5629cba... Adding: A celebration
+</code></pre>
+
+<p>It's as if this HEAD is the only head that matters now that the new spotlight is on it. It is "detached" from the rest of its chain. Any time Git is not sure where the previous paper clip dancer is for its current state, it puts you into a detached HEAD state.</p>
+
+<p>You can choose to rejoin the conga line by simply checking out the name of the original conga line branch. This name is a pointer to the most recently added paper clip on the conga line chain. The new spotlight is turned out, and the old spotlight swivels back to the end of the line, and your commit ceases to be special -- you are no longer in a detached HEAD state.</p>
+
+<p>In technical terms: your repository is a direct acyclic graph of commits. Each branch points to a specific commit, which is designated as the HEAD for that particular branch. All previous commits in each branch are counted, relatively, from this HEAD commit. You may checkout any object within the repository. If you do, the commit object is examined independently of the name HEAD pointer, and thus is examined in a <em>detached</em> state. The history from that point backwards is still available, but future connections are not.</p>
+
+<p>As we now know, HEAD is just a nickname assigned to the commit with the spotlight. There are additional nicknames which you might want to be aware of, for example, ORIG_HEAD. This is a reference to the most relevant parent for the particular commit you've just made. It is especially useful when using reset as ORIG_HEAD tracks commits which Git deems "dangerous", and assigns this nickname to the last "safe" commit. This allows you to easily undo a bad merge by resetting your branch back to ORIG_HEAD.</p>
+
+<p>For even further information about this topic. Take a look through the man pages for gitrevisions.</p>
+
+<pre><code>$ git help gitrevisions
+</code></pre>
+
+<p>The help page for <code>gitrevisions</code> is also available as a <a href="https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html">formatted HTML page</a>.</p>
+
+  </div>
+</article>
+                </div>
+                <div class="span4 sidebar">
+                    <div class="well text-center">
+                        <h4>Available from O'Reilly</h4>
+		    </div>
+                    <iframe src="http://www.oreilly.com/authors/widgets/674.html" height="500px" width="200px" scrolling="no" frameborder="0"></iframe>
+                    <iframe src="http://www.oreilly.com/authors/widgets/671.html" height="500px" width="200px" scrolling="no" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        <footer class="container">
+            &copy; 2016 Git for Teams
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/components/jquery/jquery.min.js"><\/script>')</script>
+        <script src="/components/bootstrap/js/bootstrap.min.js"></script>
+                
+                <script src="/components/highlightjs/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

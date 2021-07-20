@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Merge or Rebase? &mdash; Git for Teams &mdash; Creating efficiency for teams of one or more.</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+        <link href="/css/style.css" rel="stylesheet" type="text/css" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="/components/highlightjs/styles/github.css" />
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Git for Teams activity feed" />
+        <style>
+        /** quick fix because bootstrap <pre> has a background-color. */
+        pre code { background-color: inherit; }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="/">Git for Teams</a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                                <li><a href="/resources">Articles</a></li>
+                                <li><a href="/workshops">Workshops</a></li>
+                                <li><a href="/books">The Book</a></li>
+                                <li><a href="/videos">The Videos</a></li>
+                                <li><a href="/blog">Blog</a></li>
+                                <li><a href="/about">About</a></li>
+                            </ul>
+                        </div><!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="mainContent container">
+            <div class="row-fluid">
+                <div class="span8">
+                    <article>
+<h1>Merge or Rebase?</h1>
+
+  <div>
+    <p>Tensions often run high in the "merge vs. rebase" debate. A big part of the problem is that there is no single right answer to this question. It will always depend on how you've set things up, and how you've decided to optimise your team's workflow.</p>
+
+<h1 id="presentations">Presentations</h1>
+
+<p>You've heard Emma wail about how hard SVG animations are...now you can replay the glory!</p>
+
+<p><a href="http://emmajane.github.io/rebasing-workflow/#/">A Rebasing Workflow for Git - OSCON AMS 2015 slides</a></p>
+
+<p>If you would like to submit changes, there is a repository on <a href="https://github.com/emmajane/rebasing-workflow">GitHub</a>. (Animations have only been tested in Chrome on OS X. Please don't submit bug reports if it doesn't work in your browser. Sadly this deck is not meant to be a comprehenisve resource...just a support tool for when Emma gives the presentation.)</p>
+
+<p>An older version of the same presentation is also available as a browser-more-compatible version on speaker deck (no animations, sadly).</p>
+
+<script async class="speakerdeck-embed" data-id="a425185f46274e2c81925656d4f187ce" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+
+<h1 id="diagrams">Diagrams</h1>
+
+<p>A few of the diagrams from the presentation are also available separately.</p>
+
+<p><img src="https://raw.githubusercontent.com/gitforteams/diagrams/master/flowcharts/rebase-or-merge.png" alt="Decision tree outlining when to choose rebase, and when to choose merge. tl;dr: if you're bringing in 'pre-approved' work from an outside source, use rebase. Otherwise, merge." /></p>
+
+<p>This diagram was created with <a href="https://balsamiq.com/">Balsamiq</a> v3. The <a href="https://github.com/gitforteams/diagrams/blob/master/flowcharts/rebase-or-merge.bmpr">source is available on GitHub</a>.</p>
+
+<p>Generally when we compare rebase to merge, we are referring to the shifting of a set of commits from one parent commit object, to a new one. This form of rebasing is generally used to bring a branch up-to-date with an outside source of "pre-approved" commits. For example: bringing your master branch up-to-date with changes from the project repository.</p>
+
+<p><img src="https://raw.githubusercontent.com/gitforteams/diagrams/master/balsamiq/merge-types.png" alt="Out of date feature branch; updated by a merge strategy (new commit added), or a rebase + merge with fast forward strategy" /></p>
+
+<p>Rebasing to bring a branch up to date. (Note: you may need to refresh the page to see the animation. It currently starts automatically instead of waiting for an onclick cue.)</p>
+
+<p><img src="http://gitforteams.com/assets/animation-rebasing-update-branch.svg" alt="Animation of commits being replayed onto an upstream branch." /></p>
+
+<p>A different form of rebasing, interactive rebasing, is used to alter the commits themselves, as opposed to the parent commit that a branch starts from. (Note: you may need to refresh the page to see the animation. It currently starts automatically instead of waiting for an onclick cue.)</p>
+
+<p><img src="http://gitforteams.com/assets/animation-rebasing.svg" alt="Animation of four commits being squashed into a single commit." /></p>
+
+<p>Understanding the difference between these two forms of rebasing will radically improve your chances of knowing what to do with your work. Interactive rebasing is used right before sharing your work to compress a series of commits into a whole idea which represents the reasons why the work was done. Once a series of commits have been "squashed", they might be shared with others via a Pull Request, or sharing via a merge into a shared / integration branch.</p>
+
+<h1 id="resources">Resources</h1>
+
+<ul>
+<li><a href="https://sandofsky.com/blog/git-workflow.html">Understanding the Git
+Workfow</a></li>
+<li><a href="http://softwareswirl.blogspot.ca/2009/04/truce-in-merge-vs-rebase-war.html">A truce in the merge vs. rebase war</a></li>
+<li><a href="http://kentnguyen.com/development/visualized-git-practices-for-team/">Visualized Git practices for team: branch, merge, rebase</a></li>
+<li><a href="http://randyfay.com/content/rebase-workflow-git">A Rebase Workflow for
+Git</a></li>
+<li><a href="http://www.derekgourlay.com/archives/428">When to Merge vs. When to
+Rebase</a></li>
+<li><a href="http://blog.spreedly.com/2014/06/24/merge-pull-request-considered-harmful">"Merge pull request" Considered Harmful</a></li>
+<li><a href="http://darwinweb.net/articles/the-case-for-git-rebase">The Case for Git
+Rebase</a></li>
+</ul>
+
+  </div>
+</article>
+                </div>
+                <div class="span4 sidebar">
+                    <div class="well text-center">
+                        <h4>Available from O'Reilly</h4>
+		    </div>
+                    <iframe src="http://www.oreilly.com/authors/widgets/674.html" height="500px" width="200px" scrolling="no" frameborder="0"></iframe>
+                    <iframe src="http://www.oreilly.com/authors/widgets/671.html" height="500px" width="200px" scrolling="no" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        <footer class="container">
+            &copy; 2016 Git for Teams
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/components/jquery/jquery.min.js"><\/script>')</script>
+        <script src="/components/bootstrap/js/bootstrap.min.js"></script>
+                
+                <script src="/components/highlightjs/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

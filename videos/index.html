@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Videos &mdash; Git for Teams &mdash; Creating efficiency for teams of one or more.</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+        <link href="/css/style.css" rel="stylesheet" type="text/css" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="/components/highlightjs/styles/github.css" />
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Git for Teams activity feed" />
+        <style>
+        /** quick fix because bootstrap <pre> has a background-color. */
+        pre code { background-color: inherit; }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="/">Git for Teams</a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                                <li><a href="/resources">Articles</a></li>
+                                <li><a href="/workshops">Workshops</a></li>
+                                <li><a href="/books">The Book</a></li>
+                                <li><a href="/videos">The Videos</a></li>
+                                <li><a href="/blog">Blog</a></li>
+                                <li><a href="/about">About</a></li>
+                            </ul>
+                        </div><!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="mainContent container">
+            <div class="row-fluid">
+                <div class="span8">
+                    <h1 id="videos%3A-collaborating-with-git">Videos: Collaborating with Git</h1>
+
+<p>If you’ve previously tried to learn Git but found the structure of the materials to be opaque, too academic, or just plain confusing, this hands-on video course will help you complete the task. Author and educator Emma Jane Hogbin Westby takes an unconventional approach to teaching version control with Git. Rather than start with the commands you’ll be running, she first explains why—and then demonstrates how.</p>
+
+<p>Along the way, you’ll learn several Git hacks to help you be more efficient. And that means navigating Git from the command line. Many people prefer the “convenience” of a GUI, but in the long run, learning commands is quicker and easier than clicking various buttons on a succession of screens.</p>
+
+<ul>
+<li>Create a visual map of Git by sketching your own diagrams</li>
+<li>Use an example project to get started with hosted Git repositories</li>
+<li>Learn how to upload changes and merge work with branches</li>
+<li>Work with tags to pinpoint specific commits in the history of your work</li>
+<li>Find and fix bugs by comparing “working” and “non-working” states</li>
+<li>Learn how to undo your work with rollbacks and resets</li>
+<li>Clean up your commit history with rebase</li>
+<li>Move your sample project from GitLab to GitHub</li>
+<li>Learn how to collaborate on GitHub and BitBucket</li>
+</ul>
+
+<h2 id="supplemental-materials">Supplemental Materials</h2>
+
+<ul>
+<li>Git repositories - <a href="http://github.com/gitforteams/gitforteams">GitHub</a> or <a href="http://gitlab.com/gitforteams/gitforteams">GitLab</a></li>
+<li><a href="http://shop.oreilly.com/product/0636920034520.do">Print edition</a> -- a book version of the same teaching methodology used in the videos</li>
+</ul>
+
+<h2 id="ordering-copies">Ordering Copies</h2>
+
+<p>Includes over six hours of hands-on tutorials to help you learn Git.</p>
+
+<p>Now available from O'Reilly Media as <a href="http://shop.oreilly.com/product/0636920034872.do">downloadable videos</a>, and from Safari Online as <a href="https://www.safaribooksonline.com/library/view/collaborating-with-git/9781491916162/">streaming media</a>.</p>
+
+<p>These videos are also included in the O'Reilly Media <a href="http://shop.oreilly.com/category/learning-path/git.do">Git bundle</a>.</p>
+
+<h1 id="table-of-contents">Table of Contents</h1>
+
+<p>The extended description of what's included in these videos is included below.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p><strong>Welcome and Set-up</strong>
+Prepare your workstation (drawing tool; git installed)</p>
+
+<p><strong>Warm-up Exercise</strong>
+Sketch the assembly line for your code as it exists currently, or as you think you would like it to work. Examples: centralized, peer review, automated gate keeper.</p>
+
+<h2 id="getting-started-with-hosted-git-repositories">Getting Started with Hosted Git Repositories</h2>
+
+<p><strong>Overview of permission strategies</strong>
+Most of the people I've worked with are starting out with a project they need to collaborate with. They aren't starting with an empty folder, but rather with an existing project. I personally find it easier to tinker with something rather than stare at a blank screen. So the first thing we're going to do is set you up with a practice repository that I've created. You won't be able to edit <em>my</em> copy of the project, but you will be able to make edits to your own copy. Let's start with a review of permission strategies and the way a project can be setup with Git. Overview of permission strategies: Centralized, Branched, Patched, Forked.</p>
+
+<p><strong>Creating a GitLab Account</strong>
+GitLab is a free code hosting platform which allows you to create private, and public repositories. It's also an open source product you can install behind your own firewall if you're working with a large team. It's not the most popular system out there, but I believe it offers the most flexibility to the widest range of people watching these videos. We'll get started with GitLab, and later in the lessons, I'll show you how to migrate your project to GitHub, which is currently one of the most popular code hosting platforms for open source projects. Git is distributed because work can be easily shared across multiple hosting systems. Create a GitLab account to store your first remote repository.</p>
+
+<p><strong>Forking Your First Project</strong>
+Fork the GitLab sample project. We are forking so that you can upload your changes to your own repository. If you cloned from this project directly to your computer you wouldn't be able to upload your changes to the project (only “privileged” users can do that).</p>
+
+<p><strong>Privatizing Your Repository</strong>
+Adjust the visibility of your forked repository to PRIVATE. Although this is completely optional, a lot of people feel more comfortable making mistakes when they know no one will see them.</p>
+
+<h2 id="downloading-a-remote-repository">Downloading a Remote Repository</h2>
+
+<p><strong>Overview of Git at the Command Line</strong>
+Open up the command line, and check to see which version of Git you have installed. Look at Git's short help, list of all commands, and a single command. Recommend Stack Overflow / Google in additional to the command line help.</p>
+
+<p><strong>Cloning your GitLab repository</strong>
+Review the instructions on GitLab to get the commands you need to run to download (“clone”) the remote repository. Issue the necessary commands at the command line.</p>
+
+<p><strong>Reviewing History with git log</strong>
+Take a look at the work done in the repository to date. Compare against what's stored in the GitLab browser.</p>
+
+<h2 id="getting-started-as-a-team-of-one">Getting Started as a Team of One</h2>
+
+<p><strong>Overview of Working Without a Code Hosting Server</strong>If you need to work offline, you should start here with the videos. This is several ways to start your project if you don't have a code hosting repository,such as GitLab.</p>
+
+<p><strong>Initializing an Empty Project</strong>
+Use the command <code>git init</code> to start a new project locally. This creates an empty directory that you can now put stuff into.</p>
+
+<p><strong>Converting an Existing Project to Git</strong>
+You can start with any folder of files and create a git repository from it, using the git init command. This time instead of starting with an empty directory, start with an existing directory of files and “convert” your non-versioned project into a git repository. Run the following commands: git init, git add, git commit. These will all be covered in more depth later on.</p>
+
+<p><strong>Importing a Repository</strong>
+Previously you learned how to clone a project, this hooks up the remote server as a connection to your repository. You can also start with any folder which has a .git directory in it. For example: you could share your git repository with someone via a zipped email (AVOID doing this with a tool that does synchronization, such as Dropbox, as it will corrupt your git repository!!).</p>
+
+<h2 id="connecting-to-remote-repositories">Connecting to Remote Repositories</h2>
+
+<p><strong>Overview of Connecting to Remotes</strong>
+You've been working locally, and suddenly you realize you could share your work with the upstream project. Depending on how you started your project, you will need to connect your local work in slightly different ways.</p>
+
+<p><strong>Creating a Writeable Upstream Repository</strong>
+You initially cloned a repository that uses a forking repo. Now you need to go back and create an intermediate step on the code hosting platform that you can use to issue a pull request to.</p>
+
+<p><strong>Converting a Set of Files to a Repository</strong>
+You initially started with a .zip folder with all the files, but not with the .git repository. You now want to submit an upstream patch, but you have absolutely no local history from the upstream project to connect with.</p>
+
+<p><strong>Creating a Local Remote Repository</strong>
+You want to play with remotes, but you're entirely offline (for example: watching these videos behind a firewall and you can't get access to GitLab, GitHub, etc). Use a local directory as your “remote” repository. Remote actually just means any directory that's not THIS directory.</p>
+
+<h2 id="working-with-branches">Working with Branches</h2>
+
+<p><strong>Overview of Branching Strategies</strong>
+Scheduled release vs. Continuous development.</p>
+
+<p><strong>Listing All Branches</strong>
+List all branches in the repository. Compare between the local branches, and the remote branches.</p>
+
+<p><strong>Using a Different Branch</strong>
+Checkout a different branch. Open a finder window at the same time and see how files (dis)appear when different branches are checked out.</p>
+
+<p><strong>Using Best Practices for Changes</strong>
+Always start by creating a written description of what you're about to do. Yes, this will often feel like overhead, but it is a really good habit to get into, especially when you're working in larger teams.</p>
+
+<p><strong>Creating an Issue in GitLab</strong>
+In your private repository, create a new issue ticket which outlines the changes you're about to make.</p>
+
+<p><strong>Creating a Branch</strong>
+Using the branching convention, start on MASTER, and then, create a new branch using the convention: ticket number-issue, create a new branch in your local respository. Checkout the new branch as well</p>
+
+<p><strong>Creating a Tracked Branch</strong>
+Repeat the previous lesson, but this time add tracking when the branch is created. Start by checkout of master, and branching from there.</p>
+
+<p><strong>Adding Changes to your Local Repository</strong>
+Use the command <code>git add filename</code> to add the file to the index. Then commit your changes to save the change to your local repository. I usually do a commit at the command line, and then commit --amend to write a longer commit message which relates to the issue.</p>
+
+<p><strong>Uploading Your Changes with git push</strong>
+Upload the change to the remote repository with <code>git push origin master</code>. In newer versions of git, you should be able to just use <code>git push</code>.</p>
+
+<p><strong>Adding Tracking to a Previously Created Branch</strong>
+Checkout the branch which doesn't have tracking added. Try (and fail) to push the branch. Make necessary adjustments to be able to upload the branch to the remote repository.</p>
+
+<p><strong>Confirming Your Branch was Uploaded</strong>
+Log into GitLab to ensure the branch has been uploaded to the remote repository.</p>
+
+<h2 id="working-with-tags">Working with Tags</h2>
+
+<p><strong>Overview of Tagging Strategies</strong>
+Tags are used to pin-point specific commits. They don't follow a series of commits, like a branch does. They are a single point in time along the history of your work. You can add additional information (like a commit message) to the tag. See git help tag for extra options.</p>
+
+<p><strong>Listing All Tags</strong>
+Use the command <code>git tag</code> to see a list of existing tag.</p>
+
+<p><strong>Investigating a Specific Tag</strong>
+Use the command <code>git show &lt;tagname&gt;</code> to get the commit message and the author details.</p>
+
+<p><strong>Checking Out Tags</strong>
+You can also checkout this tag. You'll go into a DETACHED HEAD STATE!  But you'll be fine.</p>
+
+<p><strong>Recovering from a Detached HEAD State</strong>
+Checkout the branch you were on previously to return to your regular work.</p>
+
+<h2 id="finding-and-fixing-bugs">Finding and Fixing Bugs</h2>
+
+<p><strong>Overview of Isolating Problems</strong>
+There are two ways to look for bugs: determining where the problem code is; and determining when (and by whom) the problem code was introduced. Generally I debug from within the current code, but in more complicated code bases it can be useful to compare “working” and “non-working” states (we'll use git bisect for this).</p>
+
+<p><strong>Using Advanced Options for Git Log</strong>
+Tips and tricks for getting the most useful git log messages – match this with diagrams of what the command is actually showing.</p>
+
+<p><strong>Finding the Last Working State with Bisect</strong>
+Define the problem you're trying to isolate, and then use git bisect to find the commit where the problem was introduced. Talk about the problem of web caching. Explain how to get “out” of the bisect once you've identified the problematic commit (by using checkout to return to a different branch).</p>
+
+<p><strong>Finding the Author History of a File with Blame</strong>
+Quick command to get a history of who has changed a specific file. Can be helpful when you're working in teams to find the person who might know more about the specific changes that were made to that part of the code base.</p>
+
+<p><strong>Using Stash to Work on an Emergency Bug Fix</strong>
+You need to do something “real quick” for a client, but you're in the middle of a complicated set of tasks in your current branch. Put all of this work on hold with the “stash” command instead of writing a useless commit that you have to unpack later.</p>
+
+<h2 id="rollbacks%2C-resets%2C-and-undoing-your-work">Rollbacks, Resets, and Undoing Your Work</h2>
+
+<p><strong>Overview of Undoing Previous Work</strong>
+Show a sketch of the working directory; index; and remote repository. You can undo work in three different places. Work can be undone by deleting commits, or by moving a previous commit to the front of the tip of your work. Rebasing allows you to also unhook previous commits from a chain of events, and create a new chain in the history (without actually deleting anything). Reflog always has your history...if you can remember the commit hash.</p>
+
+<p><strong>Using Branches for Experimental Work</strong>
+Review of how to create / delete branches locally.</p>
+
+<p><strong>Amending a Commit</strong>
+Previously we've used commit amend to change the  message for a commit, but you can also add/remove files from the commit.</p>
+
+<p><strong>Removing Changes to the Working Directory</strong>
+Use checkout and the file name to undo uncommitted work. To undo changes in bulk, you can checkout the remote again, but things might get squirrelly if there are new commits (it might try to merge commits you've made), so when you're just getting started, stick to using this method when you have Uncommitted work you want to undo.</p>
+
+<p><strong>Removing Commits with Reset</strong>
+Use this to throw away commits you didn't want to keep because they were somehow very wrong and shouldn't exist.</p>
+
+<p><strong>Promoting a Previous Commit with Revert</strong>
+Use this to rollback to a previous commit, while still showing that the previous work did exist at some point.</p>
+
+<h2 id="rewiring-history-with-rebase">Rewiring History with Rebase</h2>
+
+<p><strong>Overview of Rebase</strong>
+Unlike the previous examples, rebase is about changing the commit history for the sake of a cleaner history. Its primary function is to help you rework how you got to a given solution, rather than change the final solution itself.</p>
+
+<p><strong>Bringing Your Work Up-to-Date with Rebase</strong>
+This is likely one of the first times you'll be “forced” to use rebase when working with Git. In this use case, you're using rebase to bring your local branch up-to-date by replaying previous commits which happened upstream as if they were already in place before you started your work.</p>
+
+<p><strong>Saving and Sharing Your Resolutions with Rerere</strong>
+Once you've solved a rebase once, you'll never want to have to deal with the merge conflicts that mayhave come up during the process again. Use <code>rerere</code> to save and share your resolutions.</p>
+
+<p><strong>Using Squash to Combine Several Commits</strong>
+The next most common use for rebase is to take several little commits you've made and squash them into a single commit. This allows you to hide some of your messy work, and show only a lovely final solution to your team.</p>
+
+<p><strong>Using Squash to Truncate a Branch Before Merging</strong>
+This example is the same as the previous, except this time you are simplifying a merge / pull request before incorporating it into the trunk.</p>
+
+<p><strong>Combining Your Changes Into Another Branch with Rebase</strong>
+When you merge two branches, you preserve the history that there was once a different branch. You can maintain a single line of work in your log by “merging” two branches with rebase.</p>
+
+<p><strong>Changing Previous Commits with Interactive Rebase</strong>
+Let's say you tucked two files into a commit a little while ago which should have actually been two separate commits. Use interactive rebasing to go back to that point and fix what went where (note: you can also do interactive commits if you want to chunk changes in a single file into two commits).</p>
+
+<h2 id="collaborating-on-github">Collaborating on GitHub</h2>
+
+<p><strong>Overview of GitHub</strong>
+Introduction to who/what GitHub is. Special notes: this is a private company, it is not based on open source software. It is a platform which improves your experience with Git, but has several of its own GitHub “isms” which can make it difficult to know when you're working with Git, and when you're working with GitHub terms.</p>
+
+<p><strong>Creating an Account</strong>
+Signup for a GitHub account.</p>
+
+<p><strong>Forking a Repository</strong>
+Start by making a copy of the repository that I created. This is now your own playground to do whatever you want in. (Review of the GitLab procedure, except for GitHub.)</p>
+
+<p><strong>Making Changes to Your Fork</strong>
+If you want to make changes to your fork, you need to clone the work locally, and the push the revisions back up to the server.</p>
+
+<p><strong>Making Quicker Changes with the Web UI</strong>
+You can avoid making a local copy by using the Web UI to make simple changes to your repository. Generally it's harder to maintain good commit message quality through this method. (Linus refuses to accept commits submitted this way because of the poor formatting on messages.)</p>
+
+<p><strong>Tracking Your Changes with Issues</strong>
+A review of how to create a ticket with an issue.</p>
+
+<p><strong>Importing a New Repository</strong>
+Import the repository you created on GitLab (or download and upload the one that I created which you initially cloned from).</p>
+
+<p><strong>Accepting a Pull Request</strong>
+Overview of how to deal with an incoming pull request. (might need to break this into smaller segments)</p>
+
+<p><strong>Extending GitHub with Hub</strong>
+There is an additional set of command line tools available through the project Hub. I've used it to convert issues into Pull Requests (although I think that feature is now deprecated). Others have used it to create Pull Request builders (create a new EC2 instance for specific pull requests). If you use GitHub a lot, and are comfortable at the command line, you may find this project useful.</p>
+
+<h2 id="collaborating-on-bitbucket">Collaborating on BitBucket</h2>
+
+<p><strong>Overview of BitBucket</strong>
+Introduction to who/what BitBucket is. Special notes: this is a private company, it is not based on open source software. It is a platform which improves your experience with Git, but has several of its own “isms” which can make it difficult to know when you're working with Git, and when you're working with their terms.</p>
+
+<p><strong>Creating an Account</strong>
+Signup for a BitBucket account.</p>
+
+<p><strong>Importing a Repository</strong>
+Import the repository you created on GitLab (or download and upload the one that I created which you initially cloned from).</p>
+
+<p><strong>Making Changes to Your Fork</strong>
+If you want to make changes to your fork, you need to clone the work locally, and the push the revisions back up to the server.</p>
+
+<p><strong>Tracking Your Changes with Issues</strong>
+A review of how to create a ticket with an issue. Check to see if you can still convert an issue into a pull request.</p>
+
+<p><strong>Accepting a Merge Request</strong>
+Overview of how to deal with an incoming pull request. (might need to break this into smaller segments)</p>
+                </div>
+                <div class="span4 sidebar">
+                    <div class="well text-center">
+                        <h4>Available from O'Reilly</h4>
+		    </div>
+                    <iframe src="http://www.oreilly.com/authors/widgets/674.html" height="500px" width="200px" scrolling="no" frameborder="0"></iframe>
+                    <iframe src="http://www.oreilly.com/authors/widgets/671.html" height="500px" width="200px" scrolling="no" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        <footer class="container">
+            &copy; 2016 Git for Teams
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/components/jquery/jquery.min.js"><\/script>')</script>
+        <script src="/components/bootstrap/js/bootstrap.min.js"></script>
+                
+                <script src="/components/highlightjs/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

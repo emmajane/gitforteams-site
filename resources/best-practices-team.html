@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Best Practices for Teams &mdash; Git for Teams &mdash; Creating efficiency for teams of one or more.</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+        <link href="/css/style.css" rel="stylesheet" type="text/css" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="/components/highlightjs/styles/github.css" />
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Git for Teams activity feed" />
+        <style>
+        /** quick fix because bootstrap <pre> has a background-color. */
+        pre code { background-color: inherit; }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="/">Git for Teams</a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                                <li><a href="/resources">Articles</a></li>
+                                <li><a href="/workshops">Workshops</a></li>
+                                <li><a href="/books">The Book</a></li>
+                                <li><a href="/videos">The Videos</a></li>
+                                <li><a href="/blog">Blog</a></li>
+                                <li><a href="/about">About</a></li>
+                            </ul>
+                        </div><!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="mainContent container">
+            <div class="row-fluid">
+                <div class="span8">
+                    <article>
+<h1>Best Practices for Teams</h1>
+
+  <div>
+    <p>My very first source control system was a red binder. No joke. I was learning Perl and I'd print out my scripts, three-hole punch them, slide them into my binder (most recent at the end of the binder), mark up the scripts with a pen and then apply my changes and test my work. Sounds quaint, doesn't it? What this allowed me to do was review my thinking over time. I could easily flip back and forth to see what I'd done previously, and perhaps more importantly, I could see my thinking as it progressed.</p>
+
+<p>In the early days I commented EVERYTHING in my code: even my for loops were carefully documented. As my experience level progressed, I came to trust my ability to read code, and stopped documented the "how". You've probably heard the expression, "my code is so good, it documents itself"? The code will show you the "how", but it will never explain the "why" to you. And this, I think, is the sign of a mature developer: one who takes the time to explain the "why" as a preface to their code.</p>
+
+<p>The same holds true for version control: your early commit messages will likely document "what" changed, but as you mature and become for comfortable with the system, you will get less anxious about using Git, the tasks will become mundane, and you will free yourself to write longer commit messages which explain the "why" of your work.</p>
+
+<h1 id="teams-of-one">Teams of One</h1>
+
+<p>Solo projects, or projects where you are the sole developer. You are using version control to track your own changes, and perhaps are looking to expand your team and want to implement some structure now so that it's easier to work with others. It is assumed that no one else is working on your published repository, and that you don't need to worry about rebasing your work after it's been published.</p>
+
+<h2 id="best-practices">Best practices</h2>
+
+<p>The following points are considered an absolute minimum for the solo developer. Deviate from this list at your own peril.</p>
+
+<ol>
+<li>Commit messages are descriptive, and never repeated. They
+contain both a description of <em>what</em> was changed and <em>why</em>
+the change was made.</li>
+<li>If you are working on a problem which has a few follow-up commits to fix minor issues, squash these minor changes into a single commit using <code>git rebase -i</code>.</li>
+<li>You tag releases according to when code was published, or shared with a client so that you may easily review highlights using <code>git tag -a "tagname" -m "reason for tag"</code>.</li>
+<li>If you are extending another project, keep your own changes in a separate branch so that you can easily pull changes from the main project into your own work using <code>git branch &lt;branchname&gt;</code>.</li>
+<li>You use standards for everything that is arbitrary. For example: structure of a commit message; granularity of a commit; branch names; tag names. Document your standards in a README file which is embedded in the project.</li>
+<li>Where possible, use external, automated review tools. For example, Drupal has the <a href="https://drupal.org/project/coder">coder module</a> to check code against Drupal standards.</li>
+</ol>
+
+<h1 id="teams-of-more-than-one">Teams of More than One</h1>
+
+<p>As soon as you start collaborating on a project, you will begin building on the best practice rules. Determine ahead of time how trust will be determined. Do you have test coverage? Peer review? Who is responsible for QA?</p>
+
+<h2 id="best-practices">Best Practices</h2>
+
+<p>In addition to the best practices listed for "Teams of One", you should now add the following practices to your routine.</p>
+
+<ol>
+<li>All changes are documented first via a ticketing system of some kind. Each change is implemented in its own branch. Branches are named according to the ticket number, and a brief description. for example: <code>231-add_thumbnail_blog_posts</code>.</li>
+<li>The first word of a commit message always references the ticket number in square brackets. For example: <code>[#231] Added thumbnails to blog posts</code>. The square brackets prevent the commit message from being interpreted as a comment (and thus hidden from <code>git log</code>).</li>
+</ol>
+
+<h2 id="challenges">Challenges</h2>
+
+<p>As soon as you introduce a review process, you introduce the concept of a gate keeper. This gate keeper might be automated (Jenkins running test suites), or manual (a QA team, or peer review). You may have several review points: e.g. peer review before the ticket is closed, and the a second QA review of all tickets completed in a given sprint. Each time you delay a change from being deployed, you are introducing a potential for code to get out of sync as other developers continue to work on new problems.</p>
+
+<p>How you deal with the review and collation process will inform your branching strategy.</p>
+
+  </div>
+</article>
+                </div>
+                <div class="span4 sidebar">
+                    <div class="well text-center">
+                        <h4>Available from O'Reilly</h4>
+		    </div>
+                    <iframe src="http://www.oreilly.com/authors/widgets/674.html" height="500px" width="200px" scrolling="no" frameborder="0"></iframe>
+                    <iframe src="http://www.oreilly.com/authors/widgets/671.html" height="500px" width="200px" scrolling="no" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        <footer class="container">
+            &copy; 2016 Git for Teams
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/components/jquery/jquery.min.js"><\/script>')</script>
+        <script src="/components/bootstrap/js/bootstrap.min.js"></script>
+                
+                <script src="/components/highlightjs/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

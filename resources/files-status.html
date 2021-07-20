@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Status Report: Monitor Files Easily &mdash; Git for Teams &mdash; Creating efficiency for teams of one or more.</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+        <link href="/css/style.css" rel="stylesheet" type="text/css" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="/components/highlightjs/styles/github.css" />
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Git for Teams activity feed" />
+        <style>
+        /** quick fix because bootstrap <pre> has a background-color. */
+        pre code { background-color: inherit; }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="/">Git for Teams</a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                                <li><a href="/resources">Articles</a></li>
+                                <li><a href="/workshops">Workshops</a></li>
+                                <li><a href="/books">The Book</a></li>
+                                <li><a href="/videos">The Videos</a></li>
+                                <li><a href="/blog">Blog</a></li>
+                                <li><a href="/about">About</a></li>
+                            </ul>
+                        </div><!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="mainContent container">
+            <div class="row-fluid">
+                <div class="span8">
+                    <article>
+<h1>Status Report: Monitor Files Easily</h1>
+
+  <div>
+    <p>Everyone has their own frustrations around working with Git.
+Maybe yours are super advanced frustrations, or maybe they're
+really basic. @mickymetts recently told me about this
+frustration: "the little part of - WHERE ARE MY FREAKIN FILES
+NOW? When are they local, and merging, and branching ..." I
+have a lot of respect for folks who feel the need to use all
+caps when gettin' angry at Git. This is a sign of someone who's
+still fighting, still trying to learn and who's not given up
+yet. If you're still in all caps mode, you still care, and
+if you care, it's because you're still trying to figure things out.</p>
+
+<p>Note: I would like to add more to this resource which will include
+how to find the status of specific <em>files</em>; however, these few
+tips should be considered part of your essential git toolkit
+and might just be enough to get you started down a smoother
+path.</p>
+
+<h2 id="customize-your-command-prompt">Customize Your Command Prompt</h2>
+
+<p>If you're working from the command line, you get ZERO clues
+about what's going on with your files, until you explicitly ask
+Git about them. This is tedious to keep having to ask. It's
+like when you were 8 and sat in the back of the car whining at
+the driver saying, "are we almost there yet?"</p>
+
+<p>Instead of having to explicitly ask, I've modified my command line 
+prompt to tell me which branch I currently have checked out and 
+whether or not I've made changes to any of the files in my 
+repository. This is a fairly common hack, but every developer
+will have their own little quirks on how they implement it.
+Searching the web for <code>bash prompt git status</code> will yield lots
+of results. My own prompt is fairly simple, but others have
+added a lot more details to their prompt. For example: <a href="https://coderwall.com/p/pn8f0g">Show your git status and branch (in color) at the command prompt</a> or <a href="https://github.com/magicmonty/bash-git-prompt">local
+file status</a>. As
+with all things technical: the more you add initially, the more
+you'll need to debug if it doesn't work right away.</p>
+
+<p>I found the fancy prompts to actually be quite fussy to set up,
+and ended up giving up on the really detailed ones. I recommend
+you too start with something really simple and then add to it if
+you <em>really</em> need more information. The simple change in
+colour, along with the name of the branch, actually suits me
+just fine and is less distracting without all the extra
+information.</p>
+
+<h2 id="check-the-status-of-your-files">Check the Status of Your Files</h2>
+
+<p>Once you've got some kind of indication about the status of
+your files, you can start asking git for specifics. Assuming
+you've already adjusted your prompt, you should now get some
+kind of visual indicator when the branch you're working on is
+"dirty". This is git slang for "has work which has not been
+committed to the local repository". To check which files have
+uncommitted changes, run the command:</p>
+
+<p><code>git status</code></p>
+
+<p>Within the output, you'll find information about the
+corresponding remote branch, untracked files, and tracked files
+with changes. Here's an example from this page before the file
+was added to the local repository:</p>
+
+<pre><code>On branch master
+Your branch is up-to-date with 'origin/master'.
+
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+
+  files-status.md
+
+nothing added to commit but untracked files present (use "git add" to track)
+</code></pre>
+
+<p>The second line can be a bit misleading. It currently states
+that the branch is up-to-date with the remote repository...but
+it's only showing you the status as of <em>the last time I checked</em> the 
+remote repository. Unlike Twitter and Facebook, command line
+git is not running in the background collecting status updates
+from your friends and co-workers.</p>
+
+<h2 id="update-your-status-updates">Update Your Status Updates</h2>
+
+<p>To check if there are any changes on the server for the branch you're
+working on, you'll need to <code>fetch</code> the status of the remote
+repository:</p>
+
+<p><code>git fetch origin</code></p>
+
+<p>Assuming everything is up-to-date, you'll get no message back.
+If there have been new commits in the remote repository, you'll
+get a message as git downloads the new commits. The Atlassian
+tutorial on remote repositories does an okay job of <a href="https://www.atlassian.com/git/tutorial/remote-repositories#!fetch">explaining
+git
+fetch</a>. 
+The article also shows you how to review the new changes you've just 
+downloaded. If you have multiple projects you're working on, you 
+might find <a href="https://github.com/genehack/app-gitgot">GitGot</a> useful. 
+This little app makes it easier to bulk manage all of your local git 
+repositories from the command line.</p>
+
+<h2 id="use-a-branch-aware-log-browser">Use a Branch-Aware Log Browser</h2>
+
+<p>Finally, the last little tool I find helpful, is some kind of
+graph generator for my repository's history. This tool gives me
+the context of where a change came "from" (are you a branch? is
+it ahead of another branch in terms of commits?). GUIs for git
+will give you a much more elegant view of your repository than
+these tools, but they work just fine for me.</p>
+
+<p>I can either draw the graph at the command line:</p>
+
+<p><code>git log --oneline --graph</code></p>
+
+<p>An example of this output would be as follows:</p>
+
+<pre><code>* edcd486 Updated deps.
+* 05af892 No need for layout anymore.
+*   eb85b12 Merge pull request #11 from stevector/master--implements-spelling
+|\
+| * 086b01e Spelling fix in 2013-02-04-highlight.md
+* |   c5f46bd Merge pull request #10 from stevector/master--fixing-typo-in-readme
+|\ \
+| * | 58e67f4 Spelling fix in README
+|/ /
+* |   eebb37d Merge pull request #8 from kenjis/fix_url
+</code></pre>
+
+<p>The dots represent a commit. Anything to the right of the first
+is (or was) a branch. The branch names are not listed in this
+output.</p>
+
+<p>Or, I can open up the git browser, gitk, and click around a bit. The
+git browser is a special add-on which might not be enabled in
+your version of git. For example: this functionality is <em>not</em>
+available in the OSX-installed version of git, but it is
+available in the brew-installed version. To open the browser,
+use the following command:</p>
+
+<p><code>gitk</code></p>
+
+<h2 id="summary">Summary</h2>
+
+<p>If you're working from the command line, it can be a bit of a
+hassle to find the current status for all of your files.</p>
+
+<ol>
+<li>Update your prompt to include a git status notification.</li>
+<li>Remember to fetch changes from your remote repository
+regularly.</li>
+<li>Use a log browser to give you more context of how your
+branch is doing compared to others.</li>
+</ol>
+
+<p>If you've got more specific questions on how to see the status
+of a file, ping me on twitter (@emmajanehw), and I'll add them
+to this resource!</p>
+
+  </div>
+</article>
+                </div>
+                <div class="span4 sidebar">
+                    <div class="well text-center">
+                        <h4>Available from O'Reilly</h4>
+		    </div>
+                    <iframe src="http://www.oreilly.com/authors/widgets/674.html" height="500px" width="200px" scrolling="no" frameborder="0"></iframe>
+                    <iframe src="http://www.oreilly.com/authors/widgets/671.html" height="500px" width="200px" scrolling="no" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        <footer class="container">
+            &copy; 2016 Git for Teams
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/components/jquery/jquery.min.js"><\/script>')</script>
+        <script src="/components/bootstrap/js/bootstrap.min.js"></script>
+                
+                <script src="/components/highlightjs/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

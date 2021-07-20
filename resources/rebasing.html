@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rebasing Step-by-Step &mdash; Git for Teams &mdash; Creating efficiency for teams of one or more.</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+        <link href="/css/style.css" rel="stylesheet" type="text/css" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="/components/highlightjs/styles/github.css" />
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Git for Teams activity feed" />
+        <style>
+        /** quick fix because bootstrap <pre> has a background-color. */
+        pre code { background-color: inherit; }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="/">Git for Teams</a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                                <li><a href="/resources">Articles</a></li>
+                                <li><a href="/workshops">Workshops</a></li>
+                                <li><a href="/books">The Book</a></li>
+                                <li><a href="/videos">The Videos</a></li>
+                                <li><a href="/blog">Blog</a></li>
+                                <li><a href="/about">About</a></li>
+                            </ul>
+                        </div><!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="mainContent container">
+            <div class="row-fluid">
+                <div class="span8">
+                    <article>
+<h1>Rebasing Step-by-Step</h1>
+
+  <div>
+    <p>This is a walk-through of how I recently resolved a mid-rebase conflict. The scenario: At the very beginning of the project, I stubbed out a number of chapter files in the branch <code>drafts</code>. Once I had a few chapters finished, I uploaded the files to the builder server and realised it made for a very ugly document. I separated work-in-progress into per-chapter branches. This made things a lot cleaner. Unfortunately I forgot to delete the stub file for Chapter 10 in the branch <code>drafts</code>. Eventually I got around to it, but in the mean time, I'd also made a bunch of edits to the chapter file in the branch <code>ch10</code>. Bringing <code>ch10</code> up-to-date via rebasing meant dealing with the conflict whereby the updates in <code>drafts</code> would result in the file being removed from <code>ch10</code>, which was not what I wanted as a final outcome. This piece walks you through how I brought the branch <code>ch10</code> up-to-date while keeping the latest version of the file <code>ch10.asciidoc</code> (from <code>ch10</code>) in place.</p>
+
+<p>This is a free excerpt from my upcoming book <a href="http://gitforteams.com/books">Git for Teams</a>.</p>
+
+<h2 id="begin-rebasing">Begin Rebasing</h2>
+
+<p>Change into the branch which is currently out-of-date from the main project, but which contains new work that hasn't been introduced yet:</p>
+
+<p><code>$ git checkout ch10</code></p>
+
+<p>Begin the rebasing process:</p>
+
+<p><code>$ git rebase drafts</code></p>
+
+<p>If there are no conflicts, Git will skip merrily through the process and spit you out the other end. However...if there are conflicts...</p>
+
+<h2 id="mid-rebase-conflict-from-a-deleted-file">Mid-Rebase Conflict from a Deleted File</h2>
+
+<p>If you run into a conflict mid-rebase, Git will stop the procedure and ask you to deal with it. The following is the output from the first mid-rebase conflict.</p>
+
+<pre><code>First, rewinding head to replay your work on top of it...
+Applying: CH10: Stub file added with notes copied from video recording lessons.
+Using index info to reconstruct a base tree...
+A   ch10.asciidoc
+Falling back to patching base and 3-way merge...
+CONFLICT (modify/delete): ch10.asciidoc deleted in HEAD and modified in CH10: Stub file added with notes copied from video recording lessons.. Version CH10: Stub file added with notes copied from video recording lessons. of ch10.asciidoc left in tree.
+Failed to merge in the changes.
+Patch failed at 0001 CH10: Stub file added with notes copied from video recording lessons.
+The copy of the patch that failed is found in:
+   /Users/emmajane/Git/1234000002182/.git/rebase-apply/patch
+
+When you have resolved this problem, run "git rebase --continue".
+If you prefer to skip this patch, run "git rebase --skip" instead.
+To check out the original branch and stop rebasing, run "git rebase --abort".
+</code></pre>
+
+<p>Exactly as I anticipated: The file <code>ch10.asciidoc</code> is a problem. Git has put me into a detached <code>HEAD</code> state while I resolve the conflict.</p>
+
+<p>The relevant piece of information from this output is:</p>
+
+<p><code>When you have resolved this problem, run "git rebase --continue".</code></p>
+
+<p>This tells me that I need to:</p>
+
+<ol>
+<li>Resolve the merge conflict.</li>
+<li>Once I think the merge conflict is resolved, run the command <code>git rebase --continue</code>.</li>
+</ol>
+
+<p><em>Step 1:</em> resolve the merge conflict. I do this by editing the file in question and looking for merge conflict markers.</p>
+
+<p><code>$ vim ch10.asciidoc</code></p>
+
+<p>At this point CH10 is an out-of-date version of the file which existed at an earlier point. There are no merge conflict markers in the file, so I proceed to <em>Step 2</em>.</p>
+
+<p><code>$ git rebase --continue</code></p>
+
+<p>The following message is returned from Git:</p>
+
+<pre><code>ch10.asciidoc: needs merge
+You must edit all merge conflicts and then
+mark them as resolved using git add
+</code></pre>
+
+<p>That not very helpful! I just looked at that file and there were no merge conflicts. I'll ask Git what the problem is using the command <code>status</code>.</p>
+
+<p><code>$ git status</code></p>
+
+<p>The output from Git is as follows:</p>
+
+<pre><code>rebase in progress; onto 6ef4edb
+You are currently rebasing branch 'ch10' on '6ef4edb'.
+  (fix conflicts and then run "git rebase --continue")
+  (use "git rebase --skip" to skip this patch)
+  (use "git rebase --abort" to check out the original branch)
+
+Unmerged paths:
+  (use "git reset HEAD &lt;file&gt;..." to unstage)
+  (use "git add/rm &lt;file&gt;..." as appropriate to mark resolution)
+
+    deleted by us:   ch10.asciidoc
+
+no changes added to commit (use "git add" and/or "git commit -a")
+</code></pre>
+
+<p>Aha: <code>Unmerged paths</code> and then a little later on <code>deleted by us:   ch10.asciidoc</code>. Well I don't want the file to be deleted.</p>
+
+<p>Fortunately Git has given me a useful suggestion this time.</p>
+
+<p><code>(use "git reset HEAD &lt;file&gt;..." to unstage)</code></p>
+
+<p>This is useful because Git has told me <code>deleted by us</code> and I know I don't want to delete the file, therefore I need to <code>unstage</code> Git's change. Unstaging a change is effectively saying to Git, "that thing you were planning to do? Don't do it. In fact, forget you were even thinking about doing anything with that file. Reset your HEAD, Git."</p>
+
+<p><code>$ git reset HEAD ch10.asciidoc</code></p>
+
+<p>Now, what this command is actually doing is clearing out the staging index, and moving the pointer back to the most recent known commit. As I am knee-deep in a rebase, and in a detached HEAD state as opposed to in a branch, <code>reset</code> simply clears away the staging index and puts me in the most recent state from the rebasing process. In my case, this leaves me with the older version of the file, which is fine. As I proceed through the rebase, I'll replace the contents of the file with the latest version from the <code>ch10</code> branch.</p>
+
+<p>Still with me? Let's see what Git thinks I should do next:</p>
+
+<p><code>$ git status</code></p>
+
+<p>The output from Git is as follows:</p>
+
+<pre><code>rebase in progress; onto 6ef4edb
+You are currently rebasing branch 'ch10' on '6ef4edb'.
+  (all conflicts fixed: run "git rebase --continue")
+
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+
+    ch10.asciidoc
+
+nothing added to commit but untracked files present (use "git add" to track)
+</code></pre>
+
+<p>So I've still got the file (great!), but Git is also confused about what to do, because as far as it's concerned, that file should have been deleted. We need to explicitly add the file back into the repository at this point, which Git tells me <code>Untracked files: (use "git add &lt;file&gt;..." to include in what will be committed) ch10.asciidoc</code>. It's sort of weird formatting for my single file, but if there is a longer list of files, this formatting is lovely.</p>
+
+<p><code>$ git add ch10.asciidoc</code></p>
+
+<p>Now at this point, I know that <code>add</code> is just the beginning of a process, and that I'm going to need to <code>commit</code> the file as well, but this is rebasing and the rules are different. I'm going to ask Git what to do next by checking the <code>status</code> again.</p>
+
+<p><code>$ git status</code></p>
+
+<p>The output from Git is as follows:</p>
+
+<pre><code>rebase in progress; onto 6ef4edb
+You are currently rebasing branch 'ch10' on '6ef4edb'.
+  (all conflicts fixed: run "git rebase --continue")
+
+Changes to be committed:
+  (use "git reset HEAD &lt;file&gt;..." to unstage)
+
+    new file:   ch10.asciidoc
+</code></pre>
+
+<p>Okay, it's saying there are changes to be committed (yup, already knew that), BUT it doesn't tell me to commit them! Instead it tells me to simply continue with the rebasing <code>all conflicts fixed: run "git rebase --continue"</code>. I proceed with this command even though <code>add</code> is normally paired with <code>commit</code> to save changes.</p>
+
+<p><code>$ git rebase --continue</code></p>
+
+<h2 id="mid-rebase-conflict-from-a-single-file-merge-conflict">Mid-Rebase Conflict from a Single File Merge Conflict</h2>
+
+<p>After re-starting the rebasing process, Git has run into another conflict as it replays the commits. The output is as follows:</p>
+
+<pre><code>Applying: CH10: Stub file added with notes copied from video recording lessons.
+Applying: TOC: Adding Chapter 10 to the book build.
+Using index info to reconstruct a base tree...
+M   book.asciidoc
+Falling back to patching base and 3-way merge...
+Auto-merging book.asciidoc
+CONFLICT (content): Merge conflict in book.asciidoc
+Recorded preimage for 'book.asciidoc'
+Failed to merge in the changes.
+Patch failed at 0002 TOC: Adding Chapter 10 to the book build.
+The copy of the patch that failed is found in:
+   /Users/emmajane/Git/1234000002182/.git/rebase-apply/patch
+
+When you have resolved this problem, run "git rebase --continue".
+If you prefer to skip this patch, run "git rebase --skip" instead.
+To check out the original branch and stop rebasing, run "git rebase --abort".
+</code></pre>
+
+<p>Another conflict. You're being high maintenance, Git! Okay, okay, at least it's a different file this time (<code>CONFLICT (content): Merge conflict in book.asciidoc</code>). I take a closer look at the status again to see if Git gives me additional clues.</p>
+
+<p><code>$ git status</code></p>
+
+<p>The output from Git is as follows:</p>
+
+<pre><code>rebase in progress; onto 6ef4edb
+You are currently rebasing branch 'ch10' on '6ef4edb'.
+  (fix conflicts and then run "git rebase --continue")
+  (use "git rebase --skip" to skip this patch)
+  (use "git rebase --abort" to check out the original branch)
+
+Unmerged paths:
+  (use "git reset HEAD &lt;file&gt;..." to unstage)
+  (use "git add &lt;file&gt;..." to mark resolution)
+
+    both modified:   book.asciidoc
+
+no changes added to commit (use "git add" and/or "git commit -a")
+</code></pre>
+
+<p>Long sigh. Alright, Git. Let's see what the conflict is in this file.</p>
+
+<p><code>$ vim book.asciidoc</code></p>
+
+<p>Opening up the file in my favourite editor, I see there is indeed a legit merge conflict in this file (it has rows of angle brackets showing me the files that Git isn't sure how to resolve). The merge conflict markers are in place, and it's easy to clean things up. I save the file, and ask Git if it's happy by using the <code>status</code> command, again.</p>
+
+<p><code>$ git status</code></p>
+
+<p>The output from Git is as follows:</p>
+
+<pre><code>rebase in progress; onto 6ef4edb
+You are currently rebasing branch 'ch10' on '6ef4edb'.
+  (fix conflicts and then run "git rebase --continue")
+  (use "git rebase --skip" to skip this patch)
+  (use "git rebase --abort" to check out the original branch)
+
+Unmerged paths:
+  (use "git reset HEAD &lt;file&gt;..." to unstage)
+  (use "git add &lt;file&gt;..." to mark resolution)
+
+    both modified:   book.asciidoc
+
+no changes added to commit (use "git add" and/or "git commit -a")
+</code></pre>
+
+<p>The message is a little misleading because I <em>have</em> fixed the conflicts. At this point I opened the file to double check. Nope, no conflicts there. So now I move onto the next group of instructions: <code>unmerged paths: use "git add &lt;file&gt;..." to mark resolution</code> and then <code>both modified: book.asciidoc</code>.</p>
+
+<p><code>$ git add book.asciidoc</code></p>
+
+<p>And check the <code>status</code> again (at this point I'm starting to think "if I had a dollar for every time I ran <code>git status</code> I'd be freaking rich!"):</p>
+
+<p><code>$ git status</code></p>
+
+<p>The output from Git is as follows:</p>
+
+<pre><code>rebase in progress; onto 6ef4edb
+You are currently rebasing branch 'ch10' on '6ef4edb'.
+  (all conflicts fixed: run "git rebase --continue")
+
+Changes to be committed:
+  (use "git reset HEAD &lt;file&gt;..." to unstage)
+
+    modified:   book.asciidoc
+</code></pre>
+
+<p>Again, kinda weird, but I don't actually run the <code>commit</code> command at this point, instead, Git tells me <code>all conflicts fixed: run "git rebase --continue"</code> so I simply proceed with the rebasing process:</p>
+
+<p><code>$ git rebase --continue</code></p>
+
+<p>The output from Git is as follows:</p>
+
+<pre><code>Applying: TOC: Adding Chapter 10 to the book build.
+Recorded resolution for 'book.asciidoc'.
+Applying: CH10: Outline of GitHub topics
+</code></pre>
+
+<p>The rebasing procedure has been completed. My branch <code>ch10</code> is now up-to-date with all changes which had been previously committed to the <code>drafts</code> branch.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>There are a few different ways that rebasing can kick up a conflict. Take your time, read the instructions carefully, and if you aren't getting useful information, try using <code>git status</code> to see if there's something more helpful that Git can offer. And, if you are really in a panic about what's happening, you can always abort the process with <code>git rebase --abort</code>. This will return you the state your branch was in right before you started the rebase.</p>
+
+  </div>
+</article>
+                </div>
+                <div class="span4 sidebar">
+                    <div class="well text-center">
+                        <h4>Available from O'Reilly</h4>
+		    </div>
+                    <iframe src="http://www.oreilly.com/authors/widgets/674.html" height="500px" width="200px" scrolling="no" frameborder="0"></iframe>
+                    <iframe src="http://www.oreilly.com/authors/widgets/671.html" height="500px" width="200px" scrolling="no" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        <footer class="container">
+            &copy; 2016 Git for Teams
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/components/jquery/jquery.min.js"><\/script>')</script>
+        <script src="/components/bootstrap/js/bootstrap.min.js"></script>
+                
+                <script src="/components/highlightjs/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

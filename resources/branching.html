@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Branching &mdash; Git for Teams &mdash; Creating efficiency for teams of one or more.</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+        <link href="/css/style.css" rel="stylesheet" type="text/css" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="/components/highlightjs/styles/github.css" />
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Git for Teams activity feed" />
+        <style>
+        /** quick fix because bootstrap <pre> has a background-color. */
+        pre code { background-color: inherit; }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="/">Git for Teams</a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                                <li><a href="/resources">Articles</a></li>
+                                <li><a href="/workshops">Workshops</a></li>
+                                <li><a href="/books">The Book</a></li>
+                                <li><a href="/videos">The Videos</a></li>
+                                <li><a href="/blog">Blog</a></li>
+                                <li><a href="/about">About</a></li>
+                            </ul>
+                        </div><!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="mainContent container">
+            <div class="row-fluid">
+                <div class="span8">
+                    <article>
+<h1>Branching</h1>
+
+  <div>
+    <p>In distributed source control systems, such as Git, branching is inexpensive because the branches can exist within your local repository and do not need to be shared with the central system. The overwhelming majority of experienced developers will recommend you start a new branch for every new idea that you have. Each branch can be worked on individually, and you can leave partially completed ideas in a branch if you just need to make a fix real quick to the live site.</p>
+
+<p>Let's take a look at how this might play out: I've decided to build my web site using Sculpin, a static site generator. I download the starter kit and immediately create a new branch for my own "hacks" to the site. This new branch allows me to more easily make updates to the Sculpin software independently of the changes that I've made. I'm hacking away on the site and realize I'd like to add a new content type. I'm not really sure how (or if) it's a good idea, so I create a third branch to play around in. If I decide I don't want to keep the changes, I can simply return to the main branch of my work, and discard the tinkering. This is where you want to get to.</p>
+
+<p>I've found newcomers to git can get frustrated and stressed out as they try to switch between branches and their work isn't committed (which prevents you from making the switch). I've also found that new developers generally hold one new idea worth of code at a time, but they aren't as likely to explore multiple new code ideas simultaneously. As a result, I recommend novices master moving backwards and forwards on a single time line, rather than moving across time lines.</p>
+
+<p>On one of the early projects I worked on with a distributed version control system, I worked progressively through a few options for a client's web site. Each time I made incremental changes in a single branch, I took a snapshot of my code with both a commit, and a tag. I was able to easily show variations to the client by moving forwards or backwards in the commit history. The variations were fairly minor: colour changes, and the image used in the banner, if I remember correctly.</p>
+
+<p>Branches are not complicated. With time you will absolutely come to love them! But it can be difficult to know what "deserves" a branch if you're just starting out as a team of one. In teams of more than one, it's easy: anything that's worthy of a ticket should have its own branch so that you can make the changes outlined in the ticket. As a team of one, you might not have a ticketing system. If you do, great! Use this as your basis for what gets a new branch.</p>
+
+<p>Assuming you are working with a ticketing system, there will
+often come a time in a project where you have a group of related tickets. There will be a temptation to combine those tickets into a single feature branch. The concept of a feature branch is not unique to Git, nor are the problems associated with a feature branch.</p>
+
+<p>First, the larger the unit of work in your branch, the more likely you are
+to get distracted and forget to keep that branch up-to-date
+with the main project. This can make merging your completed
+feature branch into the project extremely difficult. Git
+doesn't provide you with any suggestions on what is "too big"
+or "too small" of an idea for a branch. Unfortunately these
+decisions come with experience.</p>
+
+<p>Second, if there is a problem with some part of the feature
+branch, it can be difficult to isolate which of the tickets are
+completed, and can be closed, and which are still not working
+and therefore must remain open. If you find yourself tempted to
+create a feature branch, check the tickets to make sure they
+are all problems whose solution can be rolled out at the same
+time if part of the code does not pass review.</p>
+
+<p>If you don't have a ticketing system, and you aren't entirely sure how to separate your branches, you're actually in luck! You have the luxury of learning about time travel before you need to worry about parallel universes (i.e. branches). If you are working with a starter kit (such as Sculpin, Jekyll, or some other CMS), create your own content branch independent of the software you've downloaded and then work in this branch. Focus on one idea at a time. Learn to use effective tags and commit messages. If you need to reverse changes, spend the time to learn how to move along your time line of commits with <code>checkout</code>, <code>stash</code>, <code>reset</code>, and <code>revert</code>. This is time well invested as it will allow you to be even more effective when you work on larger projects with more complex branching patterns.</p>
+
+<h1 id="resources">Resources</h1>
+
+<ul>
+<li><a href="http://svnbook.red-bean.com/en/1.7/svn.branchmerge.commonpatterns.html">Common Branching Patterns in SVN</a></li>
+<li><a href="http://whilefalse.blogspot.ca/2013/02/branching-is-easy-so.html">Branching Is Easy</a></li>
+</ul>
+
+  </div>
+</article>
+                </div>
+                <div class="span4 sidebar">
+                    <div class="well text-center">
+                        <h4>Available from O'Reilly</h4>
+		    </div>
+                    <iframe src="http://www.oreilly.com/authors/widgets/674.html" height="500px" width="200px" scrolling="no" frameborder="0"></iframe>
+                    <iframe src="http://www.oreilly.com/authors/widgets/671.html" height="500px" width="200px" scrolling="no" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        <footer class="container">
+            &copy; 2016 Git for Teams
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/components/jquery/jquery.min.js"><\/script>')</script>
+        <script src="/components/bootstrap/js/bootstrap.min.js"></script>
+                
+                <script src="/components/highlightjs/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>
